@@ -39,7 +39,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         var scene = self.Scene;
 
         await FTask.CompletedTask;
-
+        
         switch (scene.SceneType)
         {
             case 6666:
@@ -63,13 +63,38 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             case SceneType.Gate:
             {
                 scene.AddComponent<AccountManageComponent>();
-
+                
                 var unit = Entity.Create<Unit>(scene);
                 
                 await scene.EntityComponent.TransferOut(unit);
                 await scene.EntityComponent.TransferIn(unit);
+                
+                break;
+            }
+
+            case SceneType.Game:
+            {
+                Log.Info($"Game scene created");
+                var testDB = scene.World[Common.Database.Name];
+
+                var player = Entity.Create<Player>(scene);
+                player.Name = "Fantasy";
+                player.Level = 1;
+                await testDB.Save(player);
+                
                 break;
             }
         }
     }
+}
+
+public sealed class TestUnit : Entity
+{
+    public int ConfigId;
+}
+
+public sealed class Player : Entity
+{
+    public string Name;
+    public int Level;
 }

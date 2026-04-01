@@ -1,6 +1,7 @@
 {
     "Export": {
         "NetworkProtocolDirectory": {
+//            "Value": "/Users/fantasy/Code/Git/Fantasy/Examples/Config/NetworkProtocol",
             "Value": "/Users/fantasy/Code/Git/Fantasy/Examples/Config/NetworkProtocol",
             "Comment": "ProtoBuf文件所在的文件夹位置"
         },
