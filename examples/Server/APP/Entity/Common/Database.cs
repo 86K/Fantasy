@@ -9,5 +9,5 @@ public static class Database
     /// 数据库名称。
     /// 项目一般一个数据库多张表。
     /// </summary>
-    public static string Name = "test";
+    public static readonly string Name = "Unity";
 }

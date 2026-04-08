@@ -1,0 +1,22 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+// 客户端与服务器之间相互通信的协议定义
+
+//--------------------------------Gate作为CS之间的门户--------------------------------
+
+//--------------------------------登陆--------------------------------
+/// 客户端请求登录
+message C2G_LoginRequest // IRequest,G2C_LoginResponse
+{
+	string account = 1;
+	string password = 2;
+}
+
+/// 服务端返回登录结果
+message G2C_LoginResponse // IResponse
+{
+	string code = 1;
+	string result = 2;
+	long userId = 3;
+}

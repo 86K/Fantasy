@@ -25,16 +25,13 @@
                         OutputItemType="Analyzer"
                         ReferenceOutputAssembly="false" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Inner\" />
+    </ItemGroup>
 
     <PropertyGroup>
       <!-- SG调试输出避免被编译器升级为Error -->
       <WarningsNotAsErrors>$(WarningsNotAsErrors);DebugFantasySG</WarningsNotAsErrors>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Folder Include="Functional Examples\Benchmark\" />
-      <Folder Include="Functional Examples\Outer\Roaming\Map\Roaming1\" />
-      <Folder Include="Functional Examples\Outer\Roaming\Map\Roaming\" />
-    </ItemGroup>
 
 </Project>

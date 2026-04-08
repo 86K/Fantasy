@@ -1,0 +1,4 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+
+// 服务器与服务器之间相互通信的协议定义
