@@ -1,7 +1,8 @@
 ﻿using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
+using Newtonsoft.Json;
 
-/// <summary>
+/// <summary> 
 /// 用户信息。
 /// </summary>
 public sealed class UserInfo : Entity, ISupportedSerialize
@@ -15,4 +16,9 @@ public sealed class UserInfo : Entity, ISupportedSerialize
     /// 密码。
     /// </summary>
     public string password;
+
+    /// <summary>
+    /// 状态：1（登录中）、0（未登录）。
+    /// </summary>
+    public int loggingIn;
 }

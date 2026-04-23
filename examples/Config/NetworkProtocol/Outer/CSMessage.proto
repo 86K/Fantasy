@@ -12,11 +12,16 @@ message C2G_LoginRequest // IRequest,G2C_LoginResponse
 	string account = 1;
 	string password = 2;
 }
-
 /// 服务端返回登录结果
 message G2C_LoginResponse // IResponse
 {
 	string code = 1;
 	string result = 2;
 	long userId = 3;
+}
+
+/// 客户端登出消息
+message C2G_SignoutMessage // IMessage
+{
+	long userId = 1;
 }

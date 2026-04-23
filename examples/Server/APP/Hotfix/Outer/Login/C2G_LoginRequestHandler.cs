@@ -3,8 +3,11 @@ using Fantasy.Entitas;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 
-namespace Fantasy.Outer.Login;
+namespace Fantasy;
 
+/// <summary>
+/// 处理登录请求。
+/// </summary>
 public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
 {
     protected override async FTask Run(Session session, C2G_LoginRequest request, G2C_LoginResponse response, Action reply)
@@ -13,27 +16,35 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
         var password = request.password;
         
         // 查询数据库中是否有这个账号
-        Log.Info($"{account} {password} 请求登录");
+        Log.Debug($"{account} {password} 请求登录");
 
         var db = session.Scene.World[Common.Database.Name];
         var userInfos = await db?.Query<UserInfo>(x=>x.account.Equals(account) && x.password.Equals(password), true)!;
         
-        // 模拟一次登录查询
         if (userInfos == null || userInfos.Count == 0)
         {
-            var userInfo = Entity.Create<UserInfo>(session.Scene);
-            userInfo.account = account;
-            userInfo.password = password;
-            await db.Save(userInfo);
-            response.userId = userInfo.Id;
+            response.code = "301";
+            response.result = "账号或密码错误";
         }
         else
         {
-            response.userId = userInfos[0].Id;
+            var userInfo = userInfos[0];
+            if (userInfo.loggingIn == 1)
+            {
+                // 告诉后登录的，已经有人登录这个账号了
+                response.code = "302";
+                response.result = "账号已登录";
+            }
+            else
+            {
+                userInfo.loggingIn = 1;
+                await db.Save(userInfo);
+            
+                response.code = "200";
+                response.result = "登录成功";
+                response.userId = userInfo.Id;
+            }
         }
-        
-        response.code = "200";
-        response.result = "登录成功";
         
         await FTask.CompletedTask;
     }
