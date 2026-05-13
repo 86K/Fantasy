@@ -23,5 +23,5 @@ message G2C_LoginResponse // IResponse
 /// 客户端登出消息
 message C2G_SignoutMessage // IMessage
 {
-	long userId = 1;
+	long userId = 1; 
 }

@@ -1,5 +1,4 @@
 ﻿using Fantasy.Async;
-using Fantasy.Entitas;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 
